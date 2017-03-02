@@ -1,0 +1,136 @@
+The protocol of communication between the master/slaves/clients:
+
+1. Slave logging into master (over TCP)
+
+<SlaveInfo>
+  <Services>
+     <Service version="version identifier">Service name</Service>
+     ...
+  </Services>
+</SlaveInfo>
+
+2. Master responds with slave ID, from now on slave will always use it
+
+<ConfirmSlaveInfo>
+  <SlaveID>integer slave identifier</SlaveID>
+</ConfirmSlaveInfo>
+
+3. Slave reporting to master that it is alive
+
+<SlaveStatus>
+  <SlaveID>id</SlaveID>
+  [<TaskID>id</TaskID>]
+</SlaveStatus>
+
+4. Master sending restart request to slave (used when master restarts)
+
+<SlaveRestart>
+  <SlaveID>id</SlaveID>
+</SlaveRestart>
+
+5. Master sending a task to slave
+
+<StartTask>
+  <SlaveID>id</SlaveID>
+  <TaskID>integer task identifier</TaskID>
+  <Service version="required version">required service</Service>
+</StartTask>
+		
+(it is followed by binary data for the service
+ obtained using standard Java serialization)
+
+6. Slave accepting or rejecting the task
+
+<TaskConfirm>
+  <TaskID>id</TaskID>
+  <Status>accepted/rejected</Status>
+</TaskConfirm>
+
+7. Slave sending result back to master
+
+<SlaveReport>
+  <SlaveID>id</SlaveID>
+  <TaskID>id</TaskID>
+  <Result>ok/failed</Result>
+  [<ErrorMessage>optional error message</ErrorMessage>]
+</SlaveReport>
+
+(in case of "ok", it is followed by binary data for the 
+ service obtained using standard Java serialization)
+
+
+8. Master cancels task running at slave
+
+<StopTask>
+  <TaskID>id</TaskID>
+</StopTask>
+
+9. Client submits new task to master
+
+<ClientTask>
+  <JobID>arbitrary string job identifier chosen by user at client</JobID>
+  <Service version="required version">required service</Service>
+</ClientTask>
+
+(it is followed by binary data for the service
+ obtained using standard Java serialization)
+
+10. Master confirms the task submission to client
+
+<ConfirmClientTask>
+  <JobID>job identifier</JobID>
+  <TaskID>integer identifier assigned to the task
+          that can be used to manipulate the task later</TaskID>
+</ConfirmClientTask>
+
+11. Client determines status of one individual task or cancels a task
+
+<ClientTaskRequest>
+  <JobID>id</JobID>
+  <TaskID>id</TaskID>
+  <Operation>status/cancel</Operation>
+</ClientTaskRequest>
+
+12. Master responds with status 
+
+<MasterTaskStatus>
+  <TaskID>id</TaskID>
+  <Status>queued/running/finished/missing/cancelled</Status>
+</MasterTaskStatus>
+
+13. Client requests list of tasks for a job
+
+<ClientTaskList>
+  <JobID>id</JobID>
+</ClientTaskList>
+
+14. Master responds with list of tasks
+
+<MasterTaskList>
+  <JobID>id</JobID>
+  <MasterTaskStatus>
+    ...
+  </MasterTaskStatus>
+  <MasterTaskStatus>
+    ...
+  </MasterTaskStatus>
+  ...
+</MasterTaskList>
+
+15. Client requests task result from master
+
+<CollectTask>
+  <JobID>id</JobID>
+  <TaskID>id</TaskID>
+</CollectTask>
+
+16. Master sends task result to client
+
+<TaskReport>
+  <TaskID>id</TaskID>
+  <Result>ok/queued/running/missing/failed</Result>
+  [<ErrorMessage>optional error message</ErrorMessage>]
+</TaskReport>
+
+(in case of "ok", it is followed by binary data for the 
+ service obtained using standard Java serialization)

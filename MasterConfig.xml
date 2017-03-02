@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<MasterConfig>
+
+  <Networking>
+    <MasterWaitingForSlavesUDPPort>3141</MasterWaitingForSlavesUDPPort>
+    <MasterWaitingForSlavesTCPPort>3142</MasterWaitingForSlavesTCPPort>
+    <MasterWaitingForClientsTCPPort>3143</MasterWaitingForClientsTCPPort>
+    <SlavesWaitingForMasterTCPPort>3144</SlavesWaitingForMasterTCPPort>
+  </Networking>
+
+  <MasterRemoveInactiveSlavesDelay>120</MasterRemoveInactiveSlavesDelay>
+  
+  <Reporting>
+    <HtmlReportFrequency>30</HtmlReportFrequency>
+    <HtmlReportFileName>tinydc.html</HtmlReportFileName>
+  </Reporting>
+ 
+  <Debug>
+    <MasterMessageLogFileName>messagesAtMaster.log</MasterMessageLogFileName>
+    <MasterMessageLogOn>true</MasterMessageLogOn>
+    <MasterDebuggingOn>true</MasterDebuggingOn>
+  </Debug>
+  
+</MasterConfig>

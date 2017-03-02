@@ -1,0 +1,155 @@
+slave -> master:
+<SlaveInfo>
+  <Services>
+    <Service version="1.0">Addition</Service>
+    <Service version="1.0">Subtraction</Service>
+  </Services>
+</SlaveInfo>
+---------
+master -> slave:
+<ConfirmSlaveInfo>
+  <SlaveID>1</SlaveID>
+</ConfirmSlaveInfo>
+---------
+slave -> master:
+<SlaveStatus>
+  <SlaveID>1</SlaveID>
+</SlaveStatus>
+---------
+client -> master:
+<ClientTask>
+  <JobID>1</JobID>
+  <Service version="*">Addition</Service>
+</ClientTask>
+---------
+master -> client:
+<ConfirmClientTask>
+  <JobID>1</JobID>
+  <TaskID>1</TaskID>
+</ConfirmClientTask>
+---------
+master -> slave:
+<StartTask>
+  <SlaveID>1</SlaveID>
+  <TaskID>1</TaskID>
+  <Service version="*">Addition</Service>
+</StartTask>
+---------
+slave -> master:
+<TaskConfirm>
+  <TaskID>1</TaskID>
+  <Status>accepted</Status>
+</TaskConfirm>
+---------
+slave -> master:
+<SlaveReport>
+  <SlaveID>1</SlaveID>
+  <TaskID>1</TaskID>
+  <Result>ok</Result>
+</SlaveReport>
+---------
+client -> master:
+<ClientTaskRequest>
+  <JobID>1</JobID>
+  <TaskID>1</TaskID>
+  <Operation>status</Operation>
+</ClientTaskRequest>
+---------
+master -> client:
+<MasterTaskStatus>
+  <TaskID>1</TaskID>
+  <Status>finished</Status>
+</MasterTaskStatus>
+---------
+client -> master:
+<CollectTask>
+  <JobID>1</JobID>
+  <TaskID>1</TaskID>
+</CollectTask>
+---------
+master -> client:
+<TaskReport>
+  <TaskID>1</TaskID>
+  <Result>ok</Result>
+</TaskReport>
+---------
+slave -> master:
+<SlaveStatus>
+  <SlaveID>1</SlaveID>
+</SlaveStatus>
+---------
+client -> master:
+<ClientTask>
+  <JobID>1</JobID>
+  <Service version="*">Subtraction</Service>
+</ClientTask>
+---------
+master -> client:
+<ConfirmClientTask>
+  <JobID>1</JobID>
+  <TaskID>2</TaskID>
+</ConfirmClientTask>
+---------
+master -> slave:
+<StartTask>
+  <SlaveID>1</SlaveID>
+  <TaskID>2</TaskID>
+  <Service version="*">Subtraction</Service>
+</StartTask>
+---------
+slave -> master:
+<TaskConfirm>
+  <TaskID>2</TaskID>
+  <Status>accepted</Status>
+</TaskConfirm>
+---------
+client -> master:
+<ClientTaskRequest>
+  <JobID>1</JobID>
+  <TaskID>2</TaskID>
+  <Operation>status</Operation>
+</ClientTaskRequest>
+---------
+master -> client:
+<MasterTaskStatus>
+  <TaskID>2</TaskID>
+  <Status>running</Status>
+</MasterTaskStatus>
+---------
+slave -> master:
+<SlaveReport>
+  <SlaveID>1</SlaveID>
+  <TaskID>2</TaskID>
+  <Result>ok</Result>
+</SlaveReport>
+---------
+client -> master:
+<ClientTaskRequest>
+  <JobID>1</JobID>
+  <TaskID>2</TaskID>
+  <Operation>status</Operation>
+</ClientTaskRequest>
+---------
+master -> client:
+<MasterTaskStatus>
+  <TaskID>2</TaskID>
+  <Status>finished</Status>
+</MasterTaskStatus>
+---------
+client -> master:
+<CollectTask>
+  <JobID>1</JobID>
+  <TaskID>2</TaskID>
+</CollectTask>
+---------
+master -> client:
+<TaskReport>
+  <TaskID>2</TaskID>
+  <Result>ok</Result>
+</TaskReport>
+---------
+slave -> master:
+<SlaveStatus>
+  <SlaveID>1</SlaveID>
+</SlaveStatus>
+---------

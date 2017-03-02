@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<SlaveConfig>
+
+  <Networking>
+    <MasterWaitingForSlavesUDPPort>3141</MasterWaitingForSlavesUDPPort>
+    <MasterWaitingForSlavesTCPPort>3142</MasterWaitingForSlavesTCPPort>
+    <SlavesWaitingForMasterTCPPort>3144</SlavesWaitingForMasterTCPPort>
+    <MasterIP>127.0.0.1</MasterIP>
+  </Networking>
+
+  <SlaveStatusPeriod>60</SlaveStatusPeriod>
+
+  <ActiveServices>
+    <Service>Addition</Service>
+    <Service>Subtraction</Service>
+  </ActiveServices>
+  
+</SlaveConfig>

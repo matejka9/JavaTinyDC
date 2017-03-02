@@ -1,0 +1,107 @@
+slave -> master:
+<SlaveInfo>
+  <Services>
+    <Service version="1.0">Addition</Service>
+    <Service version="1.0">Subtraction</Service>
+  </Services>
+</SlaveInfo>
+---------
+master -> slave:
+<ConfirmSlaveInfo>
+  <SlaveID>1</SlaveID>
+</ConfirmSlaveInfo>
+---------
+slave -> master:
+<SlaveStatus>
+  <SlaveID>1</SlaveID>
+</SlaveStatus>
+---------
+client -> master:
+<ClientTask>
+  <JobID>ax</JobID>
+  <Service version="*">Subtraction</Service>
+</ClientTask>
+---------
+master -> client:
+<ConfirmClientTask>
+  <JobID>ax</JobID>
+  <TaskID>1</TaskID>
+</ConfirmClientTask>
+---------
+master -> slave:
+<StartTask>
+  <SlaveID>1</SlaveID>
+  <TaskID>1</TaskID>
+  <Service version="*">Subtraction</Service>
+</StartTask>
+---------
+slave -> master:
+<TaskConfirm>
+  <TaskID>1</TaskID>
+  <Status>accepted</Status>
+</TaskConfirm>
+---------
+slave -> master:
+<SlaveReport>
+  <SlaveID>1</SlaveID>
+  <TaskID>1</TaskID>
+  <Result>ok</Result>
+</SlaveReport>
+---------
+slave -> master:
+<SlaveStatus>
+  <SlaveID>1</SlaveID>
+</SlaveStatus>
+---------
+client -> master:
+<ClientTaskRequest>
+  <JobID>ax</JobID>
+  <TaskID>2</TaskID>
+  <Operation>status</Operation>
+</ClientTaskRequest>
+---------
+master -> client:
+<MasterTaskStatus>
+  <TaskID>2</TaskID>
+  <Status>missing</Status>
+</MasterTaskStatus>
+---------
+client -> master:
+<ClientTaskRequest>
+  <JobID>ax</JobID>
+  <TaskID>1</TaskID>
+  <Operation>status</Operation>
+</ClientTaskRequest>
+---------
+master -> client:
+<MasterTaskStatus>
+  <TaskID>1</TaskID>
+  <Status>finished</Status>
+</MasterTaskStatus>
+---------
+client -> master:
+<ClientTaskList>
+  <JobID>ax</JobID>
+</ClientTaskList>
+---------
+master -> client:
+<MasterTaskList>
+  <JobID>ax</JobID>
+  <MasterTaskStatus>
+    <TaskID>1</TaskID>
+    <Status>finished</Status>
+  </MasterTaskStatus>
+</MasterTaskList>
+---------
+client -> master:
+<CollectTask>
+  <JobID>ax</JobID>
+  <TaskID>1</TaskID>
+</CollectTask>
+---------
+master -> client:
+<TaskReport>
+  <TaskID>1</TaskID>
+  <Result>ok</Result>
+</TaskReport>
+---------

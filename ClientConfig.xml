@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ClientConfig>
+
+  <Networking>
+    <MasterWaitingForClientsTCPPort>3143</MasterWaitingForClientsTCPPort>
+    <MasterIP>127.0.0.1</MasterIP>
+  </Networking>
+
+  <ActiveServices>
+    <Service>Addition</Service>
+    <Service>Subtraction</Service>
+  </ActiveServices>
+  
+</ClientConfig>
